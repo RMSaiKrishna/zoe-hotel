@@ -5,19 +5,19 @@ const OFFLINE_URL = '/offline.html';
 
 // Assets to cache
 const ASSETS_TO_CACHE = [
-  '/',
-  '/index.html',
-  '/offline.html',
-  '/manifest.json',
-  '/css/styles.css',
-  '/js/app.js',
-  '/images/logo.svg',
-  '/images/hero-bg.svg',
-  '/images/offline.svg',
-  '/images/icon-192.svg',
-  '/images/icon-512.svg',
-  '/images/idly.svg',
-  '/images/dosa.svg',
+  './',
+  './index.html',
+  './offline.html',
+  './manifest.json',
+  './css/styles.css',
+  './js/app.js',
+  './images/logo.svg',
+  './images/hero-bg.svg',
+  './images/offline.svg',
+  './images/icon-192.svg',
+  './images/icon-512.svg',
+  './images/idly.svg',
+  './images/dosa.svg',
   'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css',
   'https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap'
 ];
@@ -52,18 +52,61 @@ self.addEventListener('activate', event => {
 // Fetch event - serve from cache or network
 self.addEventListener('fetch', event => {
   // Skip cross-origin requests
+  if (!event.request.url.startsWith(self.location.origin) && 
+      !event.request.url.startsWith('https://fonts.googleapis.com') && 
+      !event.request.url.startsWith('https://cdnjs.cloudflare.com')) {
+    return;
+  }
+
+  // For navigation requests (HTML pages)
   if (event.request.mode === 'navigate') {
     event.respondWith(
       fetch(event.request)
         .catch(() => {
-          return caches.open(CACHE_NAME)
-            .then(cache => {
-              return cache.match(OFFLINE_URL);
-            });
+          return caches.match(OFFLINE_URL);
         })
     );
     return;
   }
+
+  // For all other requests, use a cache-first strategy
+  event.respondWith(
+    caches.match(event.request)
+      .then(cachedResponse => {
+        if (cachedResponse) {
+          return cachedResponse;
+        }
+
+        return fetch(event.request)
+          .then(response => {
+            // Don't cache responses that aren't successful
+            if (!response || response.status !== 200 || response.type !== 'basic') {
+              return response;
+            }
+
+            // Clone the response since it can only be consumed once
+            const responseToCache = response.clone();
+
+            // Add the response to the cache
+            caches.open(CACHE_NAME)
+              .then(cache => {
+                cache.put(event.request, responseToCache);
+              });
+
+            return response;
+          })
+          .catch(() => {
+            // For image requests, return a fallback image
+            if (event.request.url.match(/\.(jpg|jpeg|png|gif|svg)$/)) {
+              return caches.match('./images/offline.svg');
+            }
+            
+            // For other requests, just return the offline page
+            return caches.match(OFFLINE_URL);
+          });
+      })
+  );
+});
   
   // Standard cache-first strategy for other requests
   event.respondWith(

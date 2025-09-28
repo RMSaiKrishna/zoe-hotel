@@ -267,9 +267,8 @@ footer {
   background-color: #b71c1c;
   color: white;
   border: none;
-  border-radius: 50%;
-  width: 60px;
-  height: 60px;
+  border-radius: 30px;
+  padding: 12px 20px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -282,11 +281,25 @@ footer {
 
 .install-button:hover {
   background-color: #8f0000;
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
 
 .install-button i {
-  font-size: 24px;
+  font-size: 20px;
+  margin-right: 8px;
+}
+
+.install-text {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+@media (max-width: 576px) {
+  .install-button {
+    bottom: 15px;
+    right: 15px;
+    padding: 10px 16px;
+  }
 }
 
 /* Offline Page */

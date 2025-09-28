@@ -9,6 +9,29 @@ if (installButton) {
   installButton.style.display = 'none';
 }
 
+// Check if the app is already installed
+function isAppInstalled() {
+  // For iOS Safari
+  if (window.navigator.standalone) {
+    return true;
+  }
+  
+  // For Chrome, Edge, Firefox, etc.
+  if (window.matchMedia('(display-mode: standalone)').matches) {
+    return true;
+  }
+  
+  return false;
+}
+
+// Function to show install button
+function showInstallButton() {
+  if (installButton && !isAppInstalled()) {
+    installButton.style.display = 'flex';
+    console.log('Install button shown');
+  }
+}
+
 // Listen for the beforeinstallprompt event
 window.addEventListener('beforeinstallprompt', (e) => {
   // Prevent Chrome 67 and earlier from automatically showing the prompt
@@ -18,31 +41,43 @@ window.addEventListener('beforeinstallprompt', (e) => {
   deferredPrompt = e;
   
   // Show the install button
-  if (installButton) {
-    installButton.style.display = 'flex';
+  showInstallButton();
+  
+  // Add click event to the install button
+  installButton.addEventListener('click', () => {
+    // Hide the install button
+    installButton.style.display = 'none';
     
-    // Add click event to the install button
-    installButton.addEventListener('click', () => {
-      // Hide the install button
-      installButton.style.display = 'none';
+    // Show the install prompt
+    deferredPrompt.prompt();
+    
+    // Wait for the user to respond to the prompt
+    deferredPrompt.userChoice.then((choiceResult) => {
+      if (choiceResult.outcome === 'accepted') {
+        console.log('User accepted the install prompt');
+      } else {
+        console.log('User dismissed the install prompt');
+        // Show the button again if user dismissed
+        setTimeout(() => {
+          showInstallButton();
+        }, 2000);
+      }
       
-      // Show the install prompt
-      deferredPrompt.prompt();
-      
-      // Wait for the user to respond to the prompt
-      deferredPrompt.userChoice.then((choiceResult) => {
-        if (choiceResult.outcome === 'accepted') {
-          console.log('User accepted the install prompt');
-        } else {
-          console.log('User dismissed the install prompt');
-        }
-        
-        // Clear the deferredPrompt variable
-        deferredPrompt = null;
-      });
+      // Clear the deferredPrompt variable
+      deferredPrompt = null;
     });
-  }
+  });
 });
+
+// For iOS Safari - show install instructions
+if (navigator.userAgent.match(/iPhone|iPad|iPod/) && !window.navigator.standalone) {
+  showInstallButton();
+  
+  // iOS doesn't support beforeinstallprompt, so we need to manually show instructions
+  installButton.addEventListener('click', () => {
+    alert('To install this app on iOS: tap the Share button, then tap "Add to Home Screen"');
+  });
+}
 
 // Listen for the appinstalled event
 window.addEventListener('appinstalled', (e) => {
