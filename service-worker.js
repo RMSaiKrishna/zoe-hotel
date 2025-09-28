@@ -1,7 +1,7 @@
 // Zoe Hotel Service Worker
 
 const CACHE_NAME = 'zoe-hotel-cache-v1';
-const OFFLINE_URL = '/offline.html';
+const OFFLINE_URL = './offline.html';
 
 // Assets to cache
 const ASSETS_TO_CACHE = [
@@ -97,54 +97,12 @@ self.addEventListener('fetch', event => {
           })
           .catch(() => {
             // For image requests, return a fallback image
-            if (event.request.url.match(/\.(jpg|jpeg|png|gif|svg)$/)) {
+            if (event.request.url.match(/\.(jpg|jpeg|png|gif|svg|png)$/)) {
               return caches.match('./images/offline.svg');
             }
             
             // For other requests, just return the offline page
             return caches.match(OFFLINE_URL);
-          });
-      })
-  );
-});
-  
-  // Standard cache-first strategy for other requests
-  event.respondWith(
-    caches.match(event.request)
-      .then(response => {
-        // Return cached response if found
-        if (response) {
-          return response;
-        }
-        
-        // Clone the request for fetch and cache
-        const fetchRequest = event.request.clone();
-        
-        return fetch(fetchRequest)
-          .then(response => {
-            // Check if valid response
-            if (!response || response.status !== 200 || response.type !== 'basic') {
-              return response;
-            }
-            
-            // Clone the response for cache and return
-            const responseToCache = response.clone();
-            
-            caches.open(CACHE_NAME)
-              .then(cache => {
-                cache.put(event.request, responseToCache);
-              });
-              
-            return response;
-          })
-          .catch(error => {
-            // For image requests, return a fallback image if available
-            if (event.request.url.match(/\.(jpg|jpeg|png|gif|svg)$/)) {
-              return caches.match('/images/offline.svg');
-            }
-            
-            console.error('Fetch failed:', error);
-            throw error;
           });
       })
   );
@@ -155,8 +113,8 @@ self.addEventListener('push', event => {
   const title = 'Zoe Hotel';
   const options = {
     body: event.data.text() || 'New updates from Zoe Hotel!',
-    icon: '/images/icon-192.png',
-    badge: '/images/icon-192.png'
+    icon: './images/icon-192.svg',
+    badge: './images/icon-192.svg'
   };
   
   event.waitUntil(self.registration.showNotification(title, options));
@@ -167,6 +125,6 @@ self.addEventListener('notificationclick', event => {
   event.notification.close();
   
   event.waitUntil(
-    clients.openWindow('/')
+    clients.openWindow('./')
   );
 });
