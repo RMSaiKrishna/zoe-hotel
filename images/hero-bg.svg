@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600">
+  <style>
+    .bg { fill: #b71c1c; }
+    .plate { fill: #f5f5f5; opacity: 0.1; }
+    .food { fill: #ff6659; opacity: 0.1; }
+    .pattern { fill: #ffffff; opacity: 0.05; }
+  </style>
+  
+  <!-- Background -->
+  <rect width="1200" height="600" class="bg" />
+  
+  <!-- Pattern Elements -->
+  <g class="pattern">
+    <!-- Scattered food icons -->
+    <circle cx="100" cy="100" r="40" />
+    <circle cx="300" cy="200" r="60" />
+    <circle cx="500" cy="150" r="50" />
+    <circle cx="700" cy="300" r="70" />
+    <circle cx="900" cy="100" r="45" />
+    <circle cx="1100" cy="250" r="55" />
+    <circle cx="200" cy="400" r="65" />
+    <circle cx="400" cy="500" r="40" />
+    <circle cx="600" cy="450" r="60" />
+    <circle cx="800" cy="500" r="50" />
+    <circle cx="1000" cy="400" r="70" />
+  </g>
+  
+  <!-- Large Decorative Plate -->
+  <circle cx="200" cy="500" r="180" class="plate" />
+  
+  <!-- Large Decorative Food -->
+  <path d="M800,200 C800,100 1000,50 1100,150 C1200,250 1100,400 1000,350 C900,300 800,300 800,200Z" class="food" />
+  
+  <!-- Small Decorative Elements -->
+  <circle cx="1000" cy="500" r="100" class="plate" />
+  <circle cx="100" cy="200" r="80" class="food" />
+</svg>

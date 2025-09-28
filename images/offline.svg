@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200">
+  <style>
+    .main { fill: #b71c1c; }
+    .secondary { fill: #f5f5f5; }
+    .outline { fill: none; stroke: #b71c1c; stroke-width: 3; }
+  </style>
+  
+  <!-- Cloud with wifi symbol -->
+  <path d="M160,80 C160,50 130,40 110,50 C100,30 60,30 50,60 C20,60 20,100 40,110 C40,140 160,140 160,110 C180,100 180,70 160,80Z" class="secondary" />
+  <path d="M160,80 C160,50 130,40 110,50 C100,30 60,30 50,60 C20,60 20,100 40,110 C40,140 160,140 160,110 C180,100 180,70 160,80Z" class="outline" />
+  
+  <!-- Wifi symbol with slash (offline) -->
+  <circle cx="100" cy="110" r="5" class="main" />
+  <path d="M80,95 C85,90 95,85 120,95" class="outline" stroke-linecap="round" />
+  <path d="M70,85 C80,75 120,75 130,85" class="outline" stroke-linecap="round" />
+  <path d="M60,75 C75,60 125,60 140,75" class="outline" stroke-linecap="round" />
+  
+  <!-- Slash through wifi (offline indicator) -->
+  <line x1="60" y1="140" x2="140" y2="60" stroke="#b71c1c" stroke-width="4" stroke-linecap="round" />
+</svg>

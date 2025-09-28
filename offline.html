@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Zoe Hotel - Offline">
+    <meta name="theme-color" content="#b71c1c">
+    <title>Zoe Hotel - You're Offline</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="offline-container">
+        <img src="images/offline.svg" alt="Offline Icon">
+        <h1>You are offline</h1>
+        <p>Please reconnect to see the menu.</p>
+        <a href="index.html" class="btn">Try Again</a>
+    </div>
+
+    <script>
+        // Check if we're back online
+        window.addEventListener('online', () => {
+            window.location.href = 'index.html';
+        });
+    </script>
+</body>
+</html>

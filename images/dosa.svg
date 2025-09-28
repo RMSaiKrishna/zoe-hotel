@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300">
+  <style>
+    .bg { fill: #f9f9f9; }
+    .plate { fill: #ffffff; stroke: #dddddd; stroke-width: 2; }
+    .dosa { fill: #f0e68c; stroke: #d4b96a; stroke-width: 1; }
+    .sambar { fill: #d35400; }
+    .chutney { fill: #27ae60; }
+    .shadow { fill: #000000; opacity: 0.05; }
+  </style>
+  
+  <!-- Background -->
+  <rect width="400" height="300" class="bg" />
+  
+  <!-- Plate -->
+  <ellipse cx="200" cy="180" rx="150" ry="80" class="plate" />
+  
+  <!-- Shadow under plate -->
+  <ellipse cx="200" cy="190" rx="140" ry="70" class="shadow" />
+  
+  <!-- Dosa -->
+  <path d="M100,150 C120,120 280,120 300,150 C320,180 280,200 200,200 C120,200 80,180 100,150Z" class="dosa" />
+  
+  <!-- Sambar -->
+  <ellipse cx="150" cy="220" rx="30" ry="15" class="sambar" />
+  
+  <!-- Chutney -->
+  <ellipse cx="250" cy="220" rx="30" ry="15" class="chutney" />
+</svg>

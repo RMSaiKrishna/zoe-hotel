@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <style>
+    .bg { fill: #b71c1c; }
+    .text { fill: white; font-family: 'Arial', sans-serif; font-weight: bold; }
+    .plate { fill: #f5f5f5; }
+    .food { fill: #ff6659; }
+  </style>
+  
+  <!-- Background -->
+  <rect width="512" height="512" rx="80" class="bg" />
+  
+  <!-- Plate -->
+  <circle cx="256" cy="256" r="160" class="plate" />
+  
+  <!-- Food Icon -->
+  <path d="M196,236 C196,196 276,186 316,216 C356,246 316,306 276,296 C236,286 196,276 196,236Z" class="food" />
+  
+  <!-- Z letter -->
+  <text x="200" y="320" font-size="200" class="text">Z</text>
+  
+  <!-- Small plate decoration -->
+  <circle cx="350" cy="160" r="30" class="plate" />
+  <circle cx="350" cy="160" r="15" class="food" />
+</svg>

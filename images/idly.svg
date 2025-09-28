@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300">
+  <style>
+    .bg { fill: #f9f9f9; }
+    .plate { fill: #ffffff; stroke: #dddddd; stroke-width: 2; }
+    .idly { fill: #f5f5f5; stroke: #dddddd; stroke-width: 1; }
+    .sambar { fill: #d35400; }
+    .chutney { fill: #27ae60; }
+    .shadow { fill: #000000; opacity: 0.05; }
+  </style>
+  
+  <!-- Background -->
+  <rect width="400" height="300" class="bg" />
+  
+  <!-- Plate -->
+  <ellipse cx="200" cy="180" rx="150" ry="80" class="plate" />
+  
+  <!-- Shadow under plate -->
+  <ellipse cx="200" cy="190" rx="140" ry="70" class="shadow" />
+  
+  <!-- Idly 1 -->
+  <circle cx="150" cy="160" r="40" class="idly" />
+  <circle cx="150" cy="160" r="30" class="idly" />
+  
+  <!-- Idly 2 -->
+  <circle cx="250" cy="160" r="40" class="idly" />
+  <circle cx="250" cy="160" r="30" class="idly" />
+  
+  <!-- Sambar -->
+  <ellipse cx="150" cy="220" rx="30" ry="15" class="sambar" />
+  
+  <!-- Chutney -->
+  <ellipse cx="250" cy="220" rx="30" ry="15" class="chutney" />
+</svg>
